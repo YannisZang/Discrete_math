@@ -1,0 +1,26 @@
+import networkx as nx
+import pygraphviz as pgv
+from nxpd import draw, nxpdParams
+import matplotlib.pyplot as plt
+nxpdParams['show'] = 'ipynb'
+
+
+G = nx.DiGraph()
+G.add_edge("a", "b")
+G.add_edge("b", "c")
+G.add_edge("c", "d")
+G.add_edge("d", "e")
+G.add_edge("e", "c")
+G.add_edge("a", "d")
+
+pos = nx.nx_agraph.pygraphviz_layout(G, prog='dot')
+
+nx.draw(G, pos, with_labels=True)
+plt.show()
+
+
+
+
+
+
+
