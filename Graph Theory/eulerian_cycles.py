@@ -20,4 +20,4 @@ if nx.is_eulerian(G):
         G[e[0]][e[1]]['label'] = str(edge_number)
         edge_number += 1
 else:
-    print("There is no Eulerian cycle in this graph")
+    print("There is no Eulerian cycle in the graph")
