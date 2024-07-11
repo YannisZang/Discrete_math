@@ -111,10 +111,12 @@ def IntSqrt(n):
 
 
 def DecipherSmallDiff(ciphertext, modulo, exponent):
-    # Substitute this implementation with your code from question 5 of the "RSA Quiz".
-    small_prime = IntSqrt(modulo)
-    big_prime = modulo // small_prime
-    return Decrypt(ciphertext, small_prime, big_prime, exponent)
+  n = IntSqrt(modulo)
+  for q in range(n - 5000, n):
+    if modulo % q == 0:
+      small_prime = q
+      big_prime = modulo // q
+      return Decrypt(ciphertext, small_prime, big_prime, exponent)
 
 
 ciphertext = 1
@@ -134,12 +136,11 @@ def GCD(a, b):
   return GCD(b, a % b)
 
 def DecipherCommonDivisor(first_ciphertext, first_modulo, first_exponent, second_ciphertext, second_modulo, second_exponent):
-  # Substitute this implementation with your code from question 6 of the "RSA Quiz".
-  for common_prime in range(2, 1000000):
-    if first_modulo % common_prime == 0 and second_modulo % common_prime == 0:
-      q1 = first_modulo // common_prime
-      q2 = second_modulo // common_prime
-      return (Decrypt(first_ciphertext, common_prime, q1, first_exponent), Decrypt(second_ciphertext, common_prime, q2, second_exponent))
+  common_prime = GCD(first_modulo, second_modulo)
+  if common_prime > 1:
+    q1 = first_modulo // common_prime
+    q2 = second_modulo // common_prime
+    return (Decrypt(first_ciphertext, common_prime, q1, first_exponent), Decrypt(second_ciphertext, common_prime, q2, second_exponent))
   return ("unknown message 1", "unknown message 2")
 
 first_ciphertext = 1
