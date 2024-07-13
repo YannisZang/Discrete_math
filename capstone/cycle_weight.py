@@ -60,14 +60,26 @@ print(cycle_length(g, cycle2))
 def all_permutations(g):
     # n is the number of vertices.
     n = g.number_of_nodes()
-
     min = 2**128
     # Iterate through all permutations of n vertices
     for cycle in permutations(range(n)):
         if cycle_length(g, cycle) < min:
             min = cycle_length(g, cycle)
-
     return min
 
 
 print(all_permutations(g))
+
+
+# Compute the average weight of a Hamiltonian cycle in the given graph
+
+def average(g):
+    # n is the number of vertices.
+    n = g.number_of_nodes()
+
+    # Sum of weights of all n*(n-1)/2 edges.
+    sum_of_weights = sum(g[i][j]['weight'] for i in range(n) for j in range(i))
+
+    ave = sum_of_weights * n / (n*(n-1)/2)
+    return ave
+
