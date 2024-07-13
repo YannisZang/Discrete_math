@@ -1,4 +1,5 @@
 import networkx as nx
+from itertools import permutations
 
 
 # This function takes as input a graph g and a list of vertices of the cycle.
@@ -48,3 +49,24 @@ cycle2 = [0, 2, 1, 3]
 
 print(cycle_length(g, cycle1))
 print(cycle_length(g, cycle2))
+
+
+# Question 1
+# Implement the brute force algorithm for the Traveling Salesman Problem.
+# The algorithm should check all the permutations of the vertices and
+# return the minimum weight of a cycle visiting each vertex exactly once.
+
+
+def all_permutations(g):
+    # n is the number of vertices.
+    n = g.number_of_nodes()
+
+    min = 2**128
+    # Iterate through all permutations of n vertices
+    for cycle in permutations(range(n)):
+        if cycle_length(g, cycle) < min:
+            min = cycle_length(g, cycle)
+
+    return min
+
+
