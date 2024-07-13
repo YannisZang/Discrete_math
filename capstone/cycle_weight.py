@@ -70,3 +70,4 @@ def all_permutations(g):
     return min
 
 
+print(all_permutations(g))
